@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import "./App.css";
 
 class App extends Component {
   constructor() {
@@ -51,7 +52,7 @@ class App extends Component {
 
   render() {
     return (
-      <PicStyles>
+      <>
       <h1>The Dog Website</h1>
 
       <select> value={this.state.breed} onChange={this.handleChange}>
@@ -66,7 +67,7 @@ class App extends Component {
           <img key={index} src={image} alt="Dogs" />
         ))}
       </div>
-      </PicStyles>
+      </>
     )
   }
 }
@@ -75,13 +76,13 @@ class App extends Component {
 export default App;
 
 
-const PicStyles = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    .picture{
-      width: 400px;
-      height: 400px;
-      margin: 10px;
-    }
-`;
+// const PicStyles = styled.div`
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-evenly;
+//     .picture{
+//       width: 400px;
+//       height: 400px;
+//       margin: 10px;
+//     }
+// `;
