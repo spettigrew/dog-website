@@ -55,8 +55,8 @@ class App extends Component {
       <>
       <h1>The Dog Website</h1>
 
-      <select> value={this.state.breed} onChange={this.handleChange}>
-        <option value="husky">Husky</option>
+      <select value={this.state.breed} onChange={this.handleChange}>
+          <option value="husky">Husky</option>
           <option value="beagle">Beagle</option>
           <option value="chow">Chow</option>
           <option value="spaniel">Spaniel</option>
