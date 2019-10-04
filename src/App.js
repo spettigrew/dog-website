@@ -1,26 +1,88 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import axios from 'axios';
+// import styled from 'styled-components'
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      breed: 'husky', 
+      images: []
+    }
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      breed: event.target.value
+    })
+  }
+
+  componentDidMount() {
+   this.fetchDogImages()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.breed !== this.state.breed) {
+        
+    this.setState({
+      images: []
+    })
+    this.fetchDogImages()
+   }
+  }
+
+// ----- same idea -----
+    //   useEffect(() => {
+    // 
+    //   }, [breed])
+    //
+
+  fetchDogImages = () => {
+    axios.get(`https://dog.ceo/api/breed/${this.state.breed}/images`)
+      .then(result => {
+        this.setState({
+          images: result.data.message
+        })
+      })
+      .catch(error => {
+        console.log('error:', error)
+      })
+  }
+
+  render() {
+    return (
+      <>
+      <h1>The Dog Website</h1>
+
+      <select> value={this.state.breed} onChange={this.handleChange}>
+        <option value="husky">Husky</option>
+          <option value="beagle">Beagle</option>
+          <option value="chow">Chow</option>
+          <option value="spaniel">Spaniel</option>
+      </select>
+
+      <div>
+        {this.state.images.map((image, index) => (
+          <img key={index} src={image} alt="Dogs" />
+        ))}
+      </div>
+      </>
+    )
+  }
 }
 
+
 export default App;
+
+
+// const PicStyles = styled.div`
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-evenly;
+//     .picture{
+//       width: 400px;
+//       height: 400px;
+//       margin: 10px;
+//     }
+// `;
